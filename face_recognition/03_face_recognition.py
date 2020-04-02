@@ -1,15 +1,30 @@
 import cv2
 import numpy as np
 import os
+import hashlib
 
+trainerPath = "trainer/trainer.yml"
 recognizer = cv2.face.LBPHFaceRecognizer_create()
-recognizer.read('trainer/trainer.yml')
+recognizer.read(trainerPath)
 cascadePath = "haarcascades/haarcascade_frontalface_default.xml"
 faceCascade = cv2.CascadeClassifier(cascadePath);
 font = cv2.FONT_HERSHEY_SIMPLEX
 
+def getHash(path, blocksize=65536):
+    afile = open(path, 'rb')
+    hasher = hashlib.md5()
+    buf = afile.read(blocksize)
+    while len(buf) > 0:
+        hasher.update(buf)
+        buf = afile.read(blocksize)
+    afile.close()
+    return hasher.hexdigest()
+
 #iniciate id counter
 id = 0
+
+#save yml file hash
+ymlHash = getHash(trainerPath)
 
 # names related to ids: example ==> loze: id=1,  etc
 # 이런식으로 사용자의 이름을 사용자 수만큼 추가해준다.
@@ -25,6 +40,10 @@ minW = 0.1*cam.get(3)
 minH = 0.1*cam.get(4)
 
 while True:
+    if(ymlHash != getHash(trainerPath)):
+        ymlHash = getHash(trainerPath)
+        recognizer.read(trainerPath)
+        print("re trainning yml")
     ret, img =cam.read()
     img = cv2.flip(img, 1) # Flip vertically
     gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
