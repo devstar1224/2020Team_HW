@@ -1,4 +1,4 @@
-// 입구 왼쪽
+// 입구 왼쪽 
 #include<Servo.h>
 
 void setup() {
@@ -6,16 +6,16 @@ void setup() {
   int anglePort = 5;// 서브모터 포트번호 5번으로 통일
   int ir_sendH = 2;// 1차 적외선 출력(보내는 적외선 신호) 6번이랑 세트
   int ir_sendT = 7;// 2차 적외선 출력(보내는 적외선 신호) 3번이랑 세트
-  Servo door;
-  pinMode(ir_sendH, OUTPUT); // 1차 적외선 출력 포트
-  pinMode(ir_sendT, OUTPUT); // 2차 적외선 출력 포트
+  Servo door; // 서브모터 이름
+  pinMode(ir_sendH, OUTPUT); // 왼쪽 1차 적외선 출력 포트
+  pinMode(ir_sendT, OUTPUT); // 왼쪽 2차 적외선 출력 포트
 }
 
 void loop() {
 
   door.attach(anglePort); // 서브모터와 연결
 
-  if() // 라즈베리에서 신호가 오면
+  if( digitalRead() == HIGH ) // 라즈베리에서 신호가 오면
   {
     open(); // 문을 90도 꺽여서 문을 연다
   }
@@ -23,10 +23,10 @@ void loop() {
   if() // 2차 적외선 센서에서 신호가 인식이 안되면
   {
       close(); // 문을 - 90도 꺽어서 문을 닫는다
-      // 1차 적외선센서를 초기화 시킨다
+      digitalRead() == LOW // 1차 적외선센서를 초기화 시킨다
   }
 
-  // 2차 적외선 센서를 초기화 시킨다
+  digitalRead() == LOW // 2차 적외선 센서를 초기화 시킨다
       
 }
 
