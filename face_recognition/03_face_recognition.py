@@ -21,7 +21,7 @@ def getHash(path, blocksize=65536):
     return hasher.hexdigest()
 
 #iniciate id counter
-id = 0
+id = 1
 
 #save yml file hash
 ymlHash = getHash(trainerPath)
