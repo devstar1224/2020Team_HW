@@ -42,12 +42,3 @@ int ReturnBook(int mem_rfid, int book_rfid) {
 
     return 0;
 }
-
-int main(int argc, char** argv) {
-    printf("main---\n");
-
-    //int temp = mysql_test();
-    int temp = ReturnBook(mem_rfid, book_rfid);
-
-    return 0;
-}
