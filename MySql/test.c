@@ -13,6 +13,7 @@
 #define PIN_1 2 // GPIO Pin 18 | White cable | Data1
 #define PIN_SOUND 25 // GPIO Pin 26 | Yellow cable | Sound
 extern int LoanBook(int mem_rfid, int book_rfid);
+extern int cardrfid();
 #define MAXWIEGANDBITS 26
 #define READERTIMEOUT 3000000
 #define LEN 26
@@ -127,10 +128,10 @@ void main(void) {
             printf("Read %d bits (%d bytes): ", bitLen, bytes);
             fprintf(fp, "Read %d bits (%d bytes): ", bitLen, bytes);
         int sendData = 0;   
-	 for (i = 0; i < bytes; i++)
-                sendData += (int)data[i];
-	LoanBook(331,sendData);	
-printf("%d", sendData);
+	    for (i = 0; i < bytes; i++)
+            sendData += (int)data[i];
+	    LoanBook(cardrfid(),sendData);	
+        printf("%d", sendData);
             for (i = 0; i < bytes; i++)
                 fprintf(fp, "%02X", (int)data[i]);
 
